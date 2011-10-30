@@ -9,7 +9,7 @@ from the ground up in the C programming language, with some nice extra elements 
 To be able to play you need an Atmel AVR Arduino compatible board, or any other custom board with a (SPI-capable) microcontroller (minimum 16 Mhz and 8K RAM)
 and of course the fantastic graphics/sound shield [Gameduino](http://excamera.com/sphinx/gameduino/).
 
-(C) Bas Brugman 2011, freelance internet web application engineer and embedded hardware programmer, [visionnaire](http://www.visionnaire.nl)
+(C) Bas Brugman 2011, freelance internet web application engineer and embedded hardware programmer, [www.visionnaire.nl](http://www.visionnaire.nl).
 
 If you appreciate my work, **please** [DONATE and SUPPORT](http://pledgie.com/campaigns/16203) my game creation projects for the Gameduino. With your support I will be able to quickly
 program/port more fantastic arcade games like Pac-man, Donkey Kong and many others.
@@ -43,12 +43,12 @@ Anyway, feel free to play around with the code, fork, optimize, bug hunt or just
     * 5000 points per achievement
 - Every 20k points an extra life 
 - Implemented 6 challenging achievements:
-    1 The Right Way: On any level fill the 5 frog home slots in order from right to left.
-    2 Speedy Gonzales: Get all 5 frogs home in any level in less than 60 seconds.
-    3 Larry Laffer Style: Save 5 lady frogs in one level.
-    4 The Hungry Pig: Eat 5 insects in one level.
-    5 Calling Me Chicken?: Stay foot at the bottom berm until the timer turns red. Then manage to bring frogger home safely before the timer runs out.
-    6 Too much Seinfeld: Get hit by a truck 2 times in one level.
+    * The Right Way: On any level fill the 5 frog home slots in order from right to left.
+    * Speedy Gonzales: Get all 5 frogs home in any level in less than 60 seconds.
+    * Larry Laffer Style: Save 5 lady frogs in one level.
+    * The Hungry Pig: Eat 5 insects in one level.
+    * Calling Me Chicken?: Stay foot at the bottom berm until the timer turns red. Then manage to bring frogger home safely before the timer runs out.
+    * Too much Seinfeld: Get hit by a truck 2 times in one level.
 - Ways to die:
     * Running into road vehicles
     * Jumping into the river's water (This frog can't swim :S)
@@ -76,12 +76,13 @@ not retro for me, better use those with your 50 inch 3D LCD TV and Dolby DTS 8 s
 I developed and tested the game on 2 microcontrollers:
 
 Teensy++ 2.0 AVR AT90USB1286: 16MHZ/RAM:8K/Flash:128K/EEPROM:4K 
+
 AVR ATMega1284P: 16MHZ/RAM:16K/Flash:128K/EEPROM:4K 
 
 If you have another type of microcontroller (make sure you have at least 8K RAM and 32K flash), you only need to change some basic preprocessor settings and vars:
 
 In Makefile, change the MCU type variable to match your microcontroller.
-In SPI.h (communication from AVR to the Gameduino), add another "if defined(__AVR_youravrmcuversion__) and change the SS/MOSI/MISO/SCK pins/ports to match your AVR mcu.
+In SPI.h (communication from AVR to the Gameduino), add another "if defined(youravrmcuversion) and change the SS/MOSI/MISO/SCK pins/ports to match your AVR mcu.
 In control.h (defines) / control.c (init function) (2x 4-way joystick and 2x 5 buttons), change the pins/ports to match your AVR mcu control connections.
 
 (P.S. Only both joysticks and both CONTROL_BTN2 and CONTROL_BTN3 buttons are used in the game.)
@@ -100,4 +101,4 @@ commercially with them, like selling or renting out. However my source code is f
 Have fun!
 
 Bas Brugman
-
+[E-Mail](mailto:bas.brugman@visionnaire.nl)
