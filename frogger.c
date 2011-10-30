@@ -1050,7 +1050,9 @@ static void change_letters(byte player, byte *p_done, byte *current_letter, char
   if (btn == CONTROL_BTN2) { // toggle done or undo to correct mistakes
     *p_done ^= 1;
   } else if (!*p_done) {
-    if (joy == CONTROL_UP) {
+    if (btn == CONTROL_BTN3) { // reset current letter back to a dot, aka deleting
+      p_name[*current_letter] = 0x2e;
+    } else if (joy == CONTROL_UP) {
       if (p_name[*current_letter] == 0x2e && !*current_letter) { // starting dot and first letter 
         p_name[*current_letter] = 0x41;
       } else if (p_name[*current_letter] == 0x2e) { // starting dot
@@ -1463,7 +1465,8 @@ void player_start(byte player)
     *dying = 1;
   } else if (location(*frogx, *frogy) == LOC_ROAD) { // road section
     if (*touching) { // if touching something
-      *dying = 1;
+      if ((*deadly_river_object != 0x00) && (*deadly_river_object != 0x01 && *deadly_river_object_pal != 4)) // you may only touch player 1's frog
+        *dying = 1;
       // check for achievement 6: "too much seinfeld", hitting a truck
       if ((achiev[5] != 0xff) && ((*deadly_river_object == 0x02 && *deadly_river_object_pal == 6) || (*deadly_river_object == 0x03 && *deadly_river_object_pal == 4)))
         achiev[5]++;
@@ -1678,9 +1681,8 @@ void player_start(byte player)
   } else if (location(*frogx, *frogy) == LOC_BOTTOM_BANK) {
     // update for achievement 5: "calling me chicken?"
     if (level_timer >= 2592 && achiev[4] != 0xff) {
-      if (gamemode) { // in 2-player mode, both need to be at the bottom
-        achiev[4] = (location(p1_frogx, p1_frogy) == LOC_BOTTOM_BANK && location(p2_frogx, p2_frogy) == LOC_BOTTOM_BANK);
-      } else {
+      // in 1-player mode stay at the bottom or in 2-player mode, both need to stay at the bottom
+      if (!gamemode || (gamemode && (location(p1_frogx, p1_frogy) == LOC_BOTTOM_BANK) && (location(p2_frogx, p2_frogy) == LOC_BOTTOM_BANK))) {
         achiev[4] = 1;
       }
     } else if (level_timer < 2592 && achiev[4] != 0xff) {
@@ -1688,7 +1690,7 @@ void player_start(byte player)
     }
   } else if (location(*frogx, *frogy) == LOC_UNKNOWN) { // wait for screen msgs, then next level
     if (!msg_empty(msg_head, msg_tail) || displaymsg) {
-      level_timer = 0;  // reset timer, to prevent dying while waiting
+      level_timer = 0;  // reset timer, to prevent dying while waiting for texts to fade
       if (player == GAME_PLAYER1) {
         vis_control_disable_p1();
       } else {

@@ -275,8 +275,8 @@ static PROGMEM prog_uint16_t midifreq[128] = {
 #define GAME_DONE         "done"
 #define GAME_TEXTTIME      216 
 #define GAME_TEXTTIMESHORT 100 
-#define GAME_GRATS        "Congratulations!"
-#define GAME_TOPLIST      "Enter your name, save with middle button."
+#define GAME_GRATS        "Superb played! Enter your cool name!"
+#define GAME_TOPLIST      "Save: middle button / Erase: lower button"
 #define GAME_POINTS1      "10 points per forward leap"
 #define GAME_POINTS2      "50 points per home savely"
 #define GAME_POINTS3      "200 points per bonus insect"
