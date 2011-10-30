@@ -1,4 +1,3 @@
-
 ![Brugmania Arcade Cabinet](https://lh6.googleusercontent.com/-lsMdu-8U-FM/Tq1ae26BHmI/AAAAAAAAADI/QX8KwsC1pIU/h301/brugmania.jpg)
 
 ### What is this?
@@ -43,7 +42,7 @@ Anyway, feel free to play around with the code, fork, optimize, bug hunt or just
     * 5000 points per achievement
 - Every 20k points an extra life 
 - Implemented 6 challenging achievements:
-    * The Right Way: On any level fill the 5 frog home slots in order from right to left.
+    * The Right Way: On any level fill the 5 frog home slots in order from left to right.
     * Speedy Gonzales: Get all 5 frogs home in any level in less than 60 seconds.
     * Larry Laffer Style: Save 5 lady frogs in one level.
     * The Hungry Pig: Eat 5 insects in one level.
