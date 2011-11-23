@@ -86,7 +86,7 @@ In control.h (defines) / control.c (init function) (2x 4-way joystick and 2x 5 b
 
 (P.S. Only both joysticks and both CONTROL_BTN2 and CONTROL_BTN3 buttons are used in the game.)
 
-My development platform is Xubuntu. It's very to install the avr-libc tool chain:
+My development platform is Xubuntu. It's very easy to install the avr-libc tool chain:
 
 sudo aptitude install avr-libc gcc-avr gdb-avr simulavr avrdude avrdude-doc binutils-avr binutils avra libusb-1.0-0-dev libusb-dev
 

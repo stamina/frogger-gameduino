@@ -37,7 +37,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-//#define VIS_DEBUG // use for debugging over UART
+/*#define VIS_DEBUG // use for debugging over UART*/
 #define CPU_PRESCALE(n) (CLKPR = 0x80, CLKPR = (n)) // definition of the mcu's prescaler, use 0 to go full speed
 
 #include <avr/io.h>
@@ -983,6 +983,8 @@ static void save_scores_start()
     vis_gd_wstartspr((current_frame ? 0 + p1_frogspr : 256 + p1_frogspr));
     draw_general_intro_sprite(p1_frogx + (p1_current_letter * 16) , p1_frogy, 2, 0, 0);
     vis_gd_end(); // end spi communication with GD
+  } else { // no highscore or achievement
+    p1_done = 1;
   }
   if (p2_score_pos != -1 || p2_achievs > 0) { // 2-player mode
     draw_text(GAME_NAMEP2, 0, 22, 0, ALIGN_CENTER);
@@ -990,6 +992,8 @@ static void save_scores_start()
     vis_gd_wstartspr((current_frame ? 0 + p2_frogspr : 256 + p2_frogspr));
     draw_general_intro_sprite(p2_frogx + (p2_current_letter * 16) , p2_frogy, 22, 0, 0);
     vis_gd_end(); // end spi communication with GD
+  } else { // no highscore or achievement
+    p2_done = 1;
   }
   t++; // general timer, basically everything that moves at a certain speed is based on this
   vis_gd_waitvblank(); // wait for complete screen draw
@@ -1378,7 +1382,8 @@ void player_start(byte player)
   if (level_timer == 3240) { // 45 secs passed
     MsgT timeup = { GAME_TEXTTIME, GAME_TIMEUP };
     msg_enqueue(msgs, &msg_tail, timeup);
-    *dying = 1;
+    if (!*dying) // only die when you aren't dead
+      *dying = 1;
   }
   if (*btn == CONTROL_BTN2 && godmode && !gamemode)  // bail out of godmode, after you've reached the hi-score ofcourse :)
     godmode = 0;
@@ -1465,7 +1470,7 @@ void player_start(byte player)
     *dying = 1;
   } else if (location(*frogx, *frogy) == LOC_ROAD) { // road section
     if (*touching) { // if touching something
-      if ((*deadly_river_object != 0x00) && (*deadly_river_object != 0x01 && *deadly_river_object_pal != 4)) // you may only touch player 1's frog
+      if ((*deadly_river_object != 0x00) && !(*deadly_river_object == 0x01 && *deadly_river_object_pal == 4)) // in 2-player mode p2 is allowed to touch p1's frog
         *dying = 1;
       // check for achievement 6: "too much seinfeld", hitting a truck
       if ((achiev[5] != 0xff) && ((*deadly_river_object == 0x02 && *deadly_river_object_pal == 6) || (*deadly_river_object == 0x03 && *deadly_river_object_pal == 4)))
@@ -1569,10 +1574,6 @@ void player_start(byte player)
                 }
               }
             }
-            // update for achievement 2: "speedy gonzales"
-            if (achiev[1] != 0xff) {
-              achiev[1] += (level_timer / 72);
-            }
             // check for achievement 5: "calling me chicken?"
             if (achiev[4] == 1) {
               achiev[4] = 0xff; // disable for now
@@ -1623,6 +1624,10 @@ void player_start(byte player)
         msg_enqueue(msgs, &msg_tail, bonusmsg);
         if (done[0] && done[1] && done[2] && done[3] && done[4]) { // level completed
           *score += 1000; // level score
+          // update for achievement 2: "speedy gonzales"
+          if (achiev[1] != 0xff) {
+            achiev[1] = (t / 72);
+          }
           // check for achievement 2: "speedy gonzales"
           if (achiev[1] > 0 && achiev[1] < 60) {
             achiev[1] = 0xff; // disable for now
@@ -1665,9 +1670,13 @@ void player_start(byte player)
               p1_achievs &= 0xf7; // unset bit 4
             }
           }
-          // move frog offscreen and wait for msgs
-          *frogx = 200; // stay in the middle, so location isn't LOC_EDGE, but LOC_UNKNOWN
-          *frogy = 300;
+          // move frog(s) offscreen and wait for msgs
+          p1_frogx = 200; // stay in the middle, so location isn't LOC_EDGE, but LOC_UNKNOWN
+          p1_frogy = 300;
+          if (gamemode) {
+            p2_frogx = 200;
+            p2_frogy = 300;
+          }
         } else {
           if (player == GAME_PLAYER1) {
             p1_init();

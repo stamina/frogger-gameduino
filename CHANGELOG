@@ -1,0 +1,7 @@
+CHANGELOG
+
+23-11-2011
+
+[X] BUG: Fixed "Speedy Gonzales" achievement: based on global timer now, because the level timer didn't take the time between deaths into account.
+[X] BUG: Fixed lockup at name-entering screen.
+[X] BUG: Fixed wrong collision detection at road section.

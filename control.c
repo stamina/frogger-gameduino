@@ -43,8 +43,9 @@ void vis_control_init() {
   DDRC = 0x00; // set as input
   PORTC = 0xFF; // set pull-ups
   // 1 button p1 and 1 button p2 ( 1x p1, 1x p2)
-  DDRD &= 0xF9; // set as 2 inputs (1111 1001)
-  PORTD |= 0x07; // set as 2 pull-ups (0000 0111) + heartbeat led
+  DDRD |= 0x80; // heartbeat led as output
+  DDRD &= 0x9F; // set as 2 inputs (1001 1111)
+  PORTD |= 0xE0; // set as 2 pull-ups (1110 0000) + heartbeat led
 #elif defined (__AVR_AT90USB1286__) // my Teensy++ 2.0
   // 8 pins for 2 joysticks
   DDRF = 0x00; // set as input

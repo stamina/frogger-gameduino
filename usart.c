@@ -38,7 +38,7 @@
 void init_usart()
 {
   cli(); // Disable global interrupts
-	UBRR1 = (F_CPU / 4 / USART_BAUDRATE - 1) / 2; // set baudrate
+  UBRR1 = (F_CPU / 4 / USART_BAUDRATE - 1) / 2; // set baudrate
 	UCSR1A = (1 << U2X1); // enable 2x speed
 	UCSR1B = (1 << RXEN1) | (1 << TXEN1) | (1 << RXCIE1); // Turn on the reception and transmission circuitry and Reception Complete Interrupt
 	UCSR1C = (1 << UCSZ11) | (1 << UCSZ10); // set 8 bits data size (default no parity bit, 1 stop bit)
