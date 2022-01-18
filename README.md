@@ -1,4 +1,4 @@
-![Brugmania Arcade Cabinet](https://lh6.googleusercontent.com/-lsMdu-8U-FM/Tq1ae26BHmI/AAAAAAAAADI/QX8KwsC1pIU/h301/brugmania.jpg)
+![Brugmania Arcade Cabinet](https://github.com/stamina/frogger-gameduino/raw/master/brugmania.jpg "DIY Arcade Cabinet")
 
 ### What is this?
 
@@ -9,9 +9,6 @@ To be able to play you need an Atmel AVR Arduino compatible board, or any other 
 and of course the fantastic graphics/sound shield [Gameduino](http://excamera.com/sphinx/gameduino/).
 
 (C) Bas Brugman 2011, freelance internet web application engineer and embedded hardware programmer, [www.visionnaire.nl](http://www.visionnaire.nl).
-
-If you appreciate my work, **please** [DONATE and SUPPORT](http://pledgie.com/campaigns/16203) my game creation projects for the Gameduino. With your support I will be able to quickly
-program/port more fantastic arcade games like Pac-man, Donkey Kong and many others.
 
 Anyway, feel free to play around with the code, fork, optimize, bug hunt or just give tips/comments.
 
@@ -66,10 +63,6 @@ Inspired by the clear and simple Gameduino Frogger tutorial (...and of course th
 when I was like 7/8 years old, begging for more coins from my parents :)), I decided to make a fully functional game out of it...
 ...3 weeks spare-time programming later, I think it's ready for prime time.
 
-This game is being used with my home-built "Brugmania" Arcade Cabinet. In my opinion an Arcade Cabinet should run retro games only on
-comparable low-powered mcu boards (like the 8-bit AVR/Gameduino combo). Throwing in some PS3/Xbox 360 or a complete PC with MAME emulator is
-not retro for me, better use those with your 50 inch 3D LCD TV and Dolby DTS 8 speaker setup :)
-
 ### Installation
 
 I developed and tested the game on 2 microcontrollers:
@@ -99,5 +92,3 @@ commercially with them, like selling or renting out. However my source code is f
 
 Have fun!
 
-Bas Brugman
-[E-Mail](mailto:bas.brugman@visionnaire.nl)
